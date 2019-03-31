@@ -233,7 +233,12 @@ public class AuthzClient {
             throw new IllegalArgumentException("Client configuration can not be null.");
         }
 
-        String configurationUrl = configuration.getAuthServerUrl();
+        String configurationUrl;
+        if(configuration.getAuthServerBackchannelUrl() != null) {
+            configurationUrl = configuration.getAuthServerBackchannelUrl();
+        }else{
+            configurationUrl=configuration.getAuthServerUrl();
+        }
 
         if (configurationUrl == null) {
             throw new IllegalArgumentException("Configuration URL can not be null.");
